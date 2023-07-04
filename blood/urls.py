@@ -15,7 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
+    # admin panel
     path('admin/', admin.site.urls),
+
+    # sign-up as a donator/health-center
+    path('signup/<str:type>/', views.signup),
+
+    # log-in as blood-donator/health-center
+    path('login/<str:type>/', views.login),
+
+    # list/search health centers
+    path('health_centers/', views.health_centers),
+
+    # operations/dashboard on/of health centers `name'
+    path('health_center/<str:name>/', views.donations),
+
+    # donate blood
+    path('donate/', views.donate),
+
+    # list/search donamtions
+    path('donations/', views.donations),
+
+    # request for a blood donation
+    path('request/', views.request_donation),
+
+    #
 ]
