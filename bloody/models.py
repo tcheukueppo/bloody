@@ -33,16 +33,16 @@ class health_person(models.Model):
     profile = models.ImageField(upload_to = upload)
 
 class demand(models.Model):
-    blood_group = models.CharField(max_length = 3, choices = BGs)
-    age         = models.PositiveIntegerField()
-    sex         = models.CharField(max_length = 2)
-    date        = models.DateTimeField()
-    location    = models.TextField(blank = True)
-    center      = models.ForeignKey(health_person, on_delete = models.CASCADE)
+    health_person = models.ForeignKey(health_person, on_delete = models.CASCADE)
+    blood_group   = models.CharField(max_length = 3, choices = BGs)
+    age           = models.PositiveIntegerField()
+    sex           = models.CharField(max_length = 2)
+    date          = models.DateTimeField()
+    location      = models.TextField(blank = True)
 
 class donator(models.Model):
     def upload(instance, filename):
-        return "donator_{0}/{1}".format(instance.name, filename)
+        return "donor_{0}/{1}".format(instance.name, filename)
 
     user    = models.OneToOneField(User, on_delete = models.CASCADE)
     name    = models.CharField(max_length = 256)
